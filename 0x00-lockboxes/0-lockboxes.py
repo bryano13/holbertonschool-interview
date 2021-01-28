@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Boxes and more"""
+
 
 def canUnlockAll(boxes):
     """Boxes connections unlocked"""
@@ -25,7 +27,6 @@ def canUnlockAll(boxes):
                         k = index
                         break
                     elif index >= N:
-                        print("False")
                         return False
                     elif b_dict[k][0] == k and len(b_dict[k]) == 1:
                         return False
