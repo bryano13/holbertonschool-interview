@@ -14,7 +14,7 @@ def canUnlockAll(boxes):
             # goes over every key of each box, one box at a time
             if box_key not in unblocked_boxes and box_key < len(boxes):
                 # checks which key can be added to unblocked_boxes
-                unblocked_boxes.append(box_key)
+                unblocked_boxes += [box_key]
     if len(unblocked_boxes) == len(boxes):
         return True
     else:
