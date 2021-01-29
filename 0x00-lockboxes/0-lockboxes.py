@@ -1,22 +1,21 @@
 #!/usr/bin/python3
-""" Lockboxes Method """
+"""Method that determines if all the boxes can be opened."""
 
 
 def canUnlockAll(boxes):
-    """ Determines if all the boxes can be opened """
-    keys = [0]
+    """Function that finds out if all boxes can be unlocked"""
+    unblocked_box = 0
+    unblocked_boxes = [unblocked_box]  # list of unblocked boxes
 
-    for key in keys:
-        # loop through the keys
-        box = boxes[key]
-        for nkey in box:
-            # get the new key in each box
-            if nkey not in keys and nkey < len(boxes):
-                # save the new key in the keys list
-                keys.append(nkey)
-
-    if len(keys) == len(boxes):
-        # check if the keys are equal to the number of boxes to open all
+    for index in unblocked_boxes:
+        # goes over every new index added to the unblocked_boxes list
+        box_sublist = boxes[index]
+        for box_key in box_sublist:
+            # goes over every key of each box, one box at a time
+            if box_key not in unblocked_boxes and box_key < len(boxes):
+                # checks which key can be added to unblocked_boxes
+                unblocked_boxes.append(box_key)
+    if len(unblocked_boxes) == len(boxes):
         return True
     else:
         return False
