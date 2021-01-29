@@ -1,38 +1,21 @@
 #!/usr/bin/python3
-"""Boxes and more"""
+"""Method that determines if all the boxes can be opened."""
 
 
 def canUnlockAll(boxes):
-    """Boxes connections unlocked"""
-    N = len(boxes)
+    """Function that finds out if all boxes can be unlocked"""
+    unblocked_box = 0
+    unblocked_boxes = [unblocked_box]  # list of unblocked boxes
 
-    b_dict = {}
-
-    for i, box in enumerate(boxes):
-        b_dict[i] = sorted(box)
-
-    L = []
-    keys = list(b_dict.keys())
-    k = 0
-    while True:
-        for index in keys:
-            if k != index:
-                try:
-                    if b_dict[k][0] == index:
-                        L.append(k)
-                        L.append(index)
-                        L = list(set(L))
-                        if len(b_dict[k]) > 1:
-                            b_dict[k].pop(0)
-                        k = index
-                        break
-                    elif index >= N:
-                        return False
-                    elif b_dict[k][0] == k and len(b_dict[k]) == 1:
-                        return False
-                except IndexError:
-                    return False
-            continue
-        if len(L) >= N:
-            break
-    return(True)
+    for index in unblocked_boxes:
+        # goes over every new index added to the unblocked_boxes list
+        box_sublist = boxes[index]
+        for box_key in box_sublist:
+            # goes over every key of each box, one box at a time
+            if box_key not in unblocked_boxes and box_key <= len(boxes):
+                # checks which key can be added to unblocked_boxes
+                unblocked_boxes += [box_key]
+    if len(unblocked_boxes) == len(boxes):
+        return True
+    else:
+        return False
