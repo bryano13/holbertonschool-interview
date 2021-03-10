@@ -23,8 +23,8 @@ if __name__ == "__main__":
             if (len(line.split()) < 2):
                 continue
             lineList = line.split()
-            statusCode = int(lineList[-2])
-            size = size + int(lineList[-1])
+            statusCode = lineList[-2]
+            size = size + int(lineList[-1]
             if statusCode in statusList:
                 try:
                     statusDict[statusCode] += 1
