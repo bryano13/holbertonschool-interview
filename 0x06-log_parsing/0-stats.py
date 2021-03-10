@@ -1,36 +1,48 @@
 #!/usr/bin/python3
-"""script that reads stdin line by line and computes metrics"""
+"""
+Task - Script that reads stdin line by line and computes metrics
+"""
+
 import sys
 
 
-def formatPrint(size, myDict):
-    """formar de dictionary"""
-    print("File size: ", size)
-    for key, value in statusDict.items():
-        print("{}: {}".format(key, value))
-
-
 if __name__ == "__main__":
-    statusList = [200, 301, 400, 401, 403, 404, 405, 500]
-    statusDict = {}
-    size = 0
-    i = 0
+    st_code = {"200": 0,
+               "301": 0,
+               "400": 0,
+               "401": 0,
+               "403": 0,
+               "404": 0,
+               "405": 0,
+               "500": 0}
+    count = 1
+    file_size = 0
+
+    def parse_line(line):
+        """ Read, parse and grab data"""
+        try:
+            parsed_line = line.split()
+            status_code = parsed_line[-2]
+            if status_code in st_code.keys():
+                st_code[status_code] += 1
+            return int(parsed_line[-1])
+        except Exception:
+            return 0
+
+    def print_stats():
+        """print stats in ascending order"""
+        print("File size: {}".format(file_size))
+        for key in sorted(st_code.keys()):
+            if st_code[key]:
+                print("{}: {}".format(key, st_code[key]))
+
     try:
         for line in sys.stdin:
-            i += 1
-            if (len(line.split()) < 2):
-                continue
-            lineList = line.split()
-            statusCode = int(lineList[-2])
-            size = size + int(lineList[-1])
-            if statusCode in statusList:
-                try:
-                    statusDict[statusCode] += 1
-                except KeyError:
-                    statusDict[statusCode] = 1
-            if i % 10 == 0:
-                formatPrint(size, statusDict)
-        formatPrint(size, statusDict)
+            file_size += parse_line(line)
+            if count % 10 == 0:
+                print_stats()
+            count += 1
     except KeyboardInterrupt:
-        formatPrint(size, statusDict)
+        print_stats()
         raise
+    print_stats()
