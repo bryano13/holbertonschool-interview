@@ -5,7 +5,7 @@ import sys
 
 def formatPrint(size, myDict):
     """format de dictionary"""
-    print("File size: ", size)
+    print("File size: {}".format(size))
     for key, value in sorted(statusDict.items()):
         if (value != 0):
             print("{}: {}".format(key, value))
@@ -13,7 +13,7 @@ def formatPrint(size, myDict):
 
 if __name__ == "__main__":
     """init code to print the parsed data"""
-    statusList = [200, 301, 400, 401, 403, 404, 405, 500]
+    statusList = ["200", "301", "400", "401", "403", "404", "405", "500"]
     statusDict = {}
     size = 0
     i = 0
@@ -23,7 +23,7 @@ if __name__ == "__main__":
             if (len(line.split()) < 2):
                 continue
             lineList = line.split()
-            statusCode = int(lineList[-2])
+            statusCode = lineList[-2]
             size = size + int(lineList[-1])
             if statusCode in statusList:
                 try:
