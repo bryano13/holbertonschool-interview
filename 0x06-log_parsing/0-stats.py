@@ -1,8 +1,10 @@
 #!/usr/bin/python3
+"""script that reads stdin line by line and computes metrics"""
 import sys
 
 
 def formatPrint(size, myDict):
+    """formar de dictionary"""
     print("File size: ", size)
     for key, value in statusDict.items():
         print("{}: {}".format(key, value))
@@ -16,6 +18,8 @@ if __name__ == "__main__":
     try:
         for line in sys.stdin:
             i += 1
+            if (len(line.split()) < 2):
+                continue
             lineList = line.split()
             statusCode = int(lineList[-2])
             size = size + int(lineList[-1])
