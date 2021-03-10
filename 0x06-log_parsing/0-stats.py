@@ -13,7 +13,7 @@ def formatPrint(size, myDict):
 
 if __name__ == "__main__":
     """init code to print the parsed data"""
-    statusList = [200, 301, 400, 401, 403, 404, 405, 500]
+    statusList = ["200", "301", "400", "401", "403", "404", "405", "500"]
     statusDict = {}
     size = 0
     i = 0
@@ -24,7 +24,7 @@ if __name__ == "__main__":
                 continue
             lineList = line.split()
             statusCode = lineList[-2]
-            size = size + int(lineList[-1]
+            size = size + int(lineList[-1])
             if statusCode in statusList:
                 try:
                     statusDict[statusCode] += 1
